@@ -1,7 +1,5 @@
 package com.oguzhanaslann.dynamicicon
 
-import android.content.ComponentName
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -34,44 +32,21 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Screen(
                         on30Click = {
-                            changeEnabledComponent(
-                                enabled = mainActivity,
-                                disabled = mainActivityAlias
+                            scheduleChangeLauncherActivity(
+                                activitiesEnabled = arrayOf(mainActivity),
+                                activitiesDisabled = arrayOf(mainActivityAlias)
                             )
                         },
                         on60Click = {
-                            changeEnabledComponent(
-                                enabled = mainActivityAlias,
-                                disabled = mainActivity
+                            scheduleChangeLauncherActivity(
+                                activitiesEnabled = arrayOf(mainActivityAlias),
+                                activitiesDisabled = arrayOf(mainActivity)
                             )
                         }
                     )
                 }
             }
         }
-    }
-
-    private fun changeEnabledComponent(
-        enabled: String,
-        disabled: String,
-    ) {
-        packageManager.setComponentEnabledSetting(
-            ComponentName(
-                this@MainActivity,
-                enabled
-            ),
-            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-            PackageManager.DONT_KILL_APP
-        )
-
-        packageManager.setComponentEnabledSetting(
-            ComponentName(
-                this@MainActivity,
-                disabled
-            ),
-            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-            PackageManager.DONT_KILL_APP
-        )
     }
 }
 

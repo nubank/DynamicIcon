@@ -8,14 +8,14 @@ private val mainActivityAlias = "com.oguzhanaslann.dynamicicon.MainActivityAlias
 
 android {
     namespace = "com.oguzhanaslann.dynamicicon"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.oguzhanaslann.dynamicicon"
         minSdk = 24
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = 34
+        versionCode = 3
+        versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -74,7 +74,7 @@ android {
 }
 
 dependencies {
-
+    implementation("androidx.work:work-runtime-ktx:2.9.1")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.7.2")
