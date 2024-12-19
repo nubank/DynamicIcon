@@ -1,6 +1,7 @@
 package com.oguzhanaslann.dynamicicon
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -32,12 +33,14 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Screen(
                         on30Click = {
+                            Log.d("HUE", "30 Click")
                             scheduleChangeLauncherActivity(
                                 activitiesEnabled = arrayOf(mainActivity),
                                 activitiesDisabled = arrayOf(mainActivityAlias)
                             )
                         },
                         on60Click = {
+                            Log.d("HUE", "60 Click")
                             scheduleChangeLauncherActivity(
                                 activitiesEnabled = arrayOf(mainActivityAlias),
                                 activitiesDisabled = arrayOf(mainActivity)

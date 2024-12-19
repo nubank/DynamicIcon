@@ -70,6 +70,7 @@ class ChangeLauncherActivityWorker(
         val activitiesEnabled = data.getStringArray("enabled")
         val activitiesDisabled = data.getStringArray("disabled")
         return try {
+            Log.d("HUE", "ChangeLauncherActivityWorker - doWork")
             changeEnabledComponent(appContext, activitiesEnabled!!, activitiesDisabled!!)
             Result.success()
         } catch (e: Exception) {

@@ -14,12 +14,25 @@ import android.util.Log
 // 1. Incluir uma ValhallaActivity no Manifest
 // 2. Caso o icone seja 60: manter ele sendo exibido - sem criar 2 icones
 // 3. Caso o icone seja 30: manter ele possibilitando a alteração para o icone 60
+
+
+/// Issue 1 - problema dos 2 icones/2 splashs
+// 1. Legacy30 -> Valhalla30
+//      a. Legacy -> Valhalla
+// 2. Legacy60 -> Valhalla60
+//      a. UV -> UVValhalla
+// 3. Legacy30 -> Valhalla60
+//      a. Legacy -> UVValhalla
+
+/// Issue 2 - Precisar startar uma activity que foi desabilitada anteriormente
+
+
 class Application : Application() {
     override fun onCreate() {
         super.onCreate()
         // TODO: ignorar ativar a Splash Legacy
 
-        handleLauncherUpdate()
+//        handleLauncherUpdate()
     }
 
     private fun handleLauncherUpdate() {
