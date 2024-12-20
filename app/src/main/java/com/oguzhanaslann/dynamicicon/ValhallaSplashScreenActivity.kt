@@ -15,7 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.oguzhanaslann.dynamicicon.ui.theme.DynamicIconTheme
 
-open class ValhallaActivityIcon30 : ComponentActivity() {
+open class ValhallaSplashScreenActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,7 +34,7 @@ open class ValhallaActivityIcon30 : ComponentActivity() {
                     Screen(
                         on30Click = {
                             Log.d("HUE", "30 Click - INTENT")
-                            startActivity(Intent(this, MainActivity::class.java))
+                            startActivity(Intent(this, SplashScreenActivity::class.java))
                         },
                         on60Click = {
                             Log.d("HUE", "60 Click - NOTHING")
@@ -50,4 +50,3 @@ open class ValhallaActivityIcon30 : ComponentActivity() {
     }
 }
 
-class ValhallaActivityIcon60 : ValhallaActivityIcon30()

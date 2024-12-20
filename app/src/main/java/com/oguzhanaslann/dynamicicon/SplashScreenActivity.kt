@@ -18,10 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.oguzhanaslann.dynamicicon.ui.theme.DynamicIconTheme
 
-val mainActivity = BuildConfig.main_activity
-val mainActivityAlias = BuildConfig.main_activity_alias
 
-class MainActivity : ComponentActivity() {
+class SplashScreenActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,15 +33,15 @@ class MainActivity : ComponentActivity() {
                         on30Click = {
                             Log.d("HUE", "30 Click")
                             scheduleChangeLauncherActivity(
-                                activitiesEnabled = arrayOf(mainActivity),
-                                activitiesDisabled = arrayOf(mainActivityAlias)
+                                activitiesEnabled = arrayOf(SplashScreenActivity::class.java.name),
+                                activitiesDisabled = arrayOf("UVSplashScreenActivity")
                             )
                         },
                         on60Click = {
                             Log.d("HUE", "60 Click")
                             scheduleChangeLauncherActivity(
-                                activitiesEnabled = arrayOf(mainActivityAlias),
-                                activitiesDisabled = arrayOf(mainActivity)
+                                activitiesEnabled = arrayOf("UVSplashScreenActivity"),
+                                activitiesDisabled = arrayOf(SplashScreenActivity::class.java.name)
                             )
                         }
                     )

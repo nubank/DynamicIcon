@@ -38,32 +38,41 @@ class Application : Application() {
     private fun handleLauncherUpdate() {
         Log.i("HUE", "handleLauncherUpdate")
         val icon60Legacy =
-            packageManager.getComponentEnabledSetting(ComponentName(packageName, mainActivityAlias))
+            packageManager.getComponentEnabledSetting(ComponentName(packageName, "UVSplashScreenActivity"))
         if (icon60Legacy == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
-            Log.i("HUE", "vai ativar ValhallaActivityIcon60")
+            Log.i("HUE", "vai ativar ValhallaUVSplashScreenActivity")
             scheduleChangeLauncherActivity(
-                activitiesEnabled = arrayOf(ValhallaActivityIcon60::class.java.name, mainActivity),
+                activitiesEnabled = arrayOf(
+                    ValhallaUVSplashScreenActivity::class.java.name,
+                    SplashScreenActivity::class.java.name
+                ),
                 activitiesDisabled = arrayOf(
-                    ValhallaActivityIcon30::class.java.name,
-                    mainActivityAlias,
+                    ValhallaSplashScreenActivity::class.java.name,
+                    "UVSplashScreenActivity",
                 ),
             )
         } else {
-            if (packageManager.getComponentEnabledSetting(ComponentName(packageName, ValhallaActivityIcon60::class.java.name)) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
+            if (packageManager.getComponentEnabledSetting(
+                    ComponentName(
+                        packageName,
+                        ValhallaUVSplashScreenActivity::class.java.name
+                    )
+                ) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+            ) {
                 return
             }
             val mainSplashActivity =
                 packageManager.getComponentEnabledSetting(
-                    ComponentName(packageName, mainActivity)
+                    ComponentName(packageName, SplashScreenActivity::class.java.name)
                 )
             if (mainSplashActivity == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
                 Log.i("HUE", "vai ativar ValhallaActivityIcon30")
                 scheduleChangeLauncherActivity(
-                    activitiesEnabled = arrayOf(ValhallaActivityIcon30::class.java.name),
+                    activitiesEnabled = arrayOf(ValhallaSplashScreenActivity::class.java.name),
                     activitiesDisabled = arrayOf(
-                        ValhallaActivityIcon60::class.java.name,
-                        mainActivityAlias,
-                        mainActivity,
+                        ValhallaUVSplashScreenActivity::class.java.name,
+                        "UVSplashScreenActivity",
+                        SplashScreenActivity::class.java.name,
                     ),
                 )
             }

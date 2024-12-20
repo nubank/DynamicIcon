@@ -3,9 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-private val mainActivity = "com.oguzhanaslann.dynamicicon.MainActivity"
-private val mainActivityAlias = "com.oguzhanaslann.dynamicicon.MainActivityAlias"
-
 android {
     namespace = "com.oguzhanaslann.dynamicicon"
     compileSdk = 34
@@ -22,10 +19,6 @@ android {
             useSupportLibrary = true
         }
 
-        manifestPlaceholders.apply {
-            set("main_activity", mainActivity)
-            set("main_activity_alias", mainActivityAlias)
-        }
     }
 
     buildTypes {
@@ -35,9 +28,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-
-            buildConfigField("String", "main_activity", "\"${mainActivity}\"")
-            buildConfigField("String", "main_activity_alias", "\"${mainActivityAlias}\"")
         }
 
         debug {
@@ -47,9 +37,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-
-            buildConfigField("String", "main_activity", "\"${mainActivity}\"")
-            buildConfigField("String", "main_activity_alias", "\"${mainActivityAlias}\"")
         }
     }
     compileOptions {
