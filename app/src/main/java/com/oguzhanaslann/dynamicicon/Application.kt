@@ -32,7 +32,7 @@ class Application : Application() {
         super.onCreate()
         // TODO: ignorar ativar a Splash Legacy
 
-//        handleLauncherUpdate()
+        handleLauncherUpdate()
     }
 
     private fun handleLauncherUpdate() {
@@ -42,23 +42,28 @@ class Application : Application() {
         if (icon60Legacy == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
             Log.i("HUE", "vai ativar ValhallaActivityIcon60")
             scheduleChangeLauncherActivity(
-                activitiesEnabled = arrayOf(ValhallaActivityIcon60::class.java.name),
+                activitiesEnabled = arrayOf(ValhallaActivityIcon60::class.java.name, mainActivity),
                 activitiesDisabled = arrayOf(
                     ValhallaActivityIcon30::class.java.name,
                     mainActivityAlias,
-                    mainActivity,
                 ),
             )
         } else {
-            Log.i("HUE", "vai ativar ValhallaActivityIcon30")
-            scheduleChangeLauncherActivity(
-                activitiesEnabled = arrayOf(ValhallaActivityIcon30::class.java.name),
-                activitiesDisabled = arrayOf(
-                    ValhallaActivityIcon60::class.java.name,
-                    mainActivityAlias,
-                    mainActivity,
-                ),
-            )
+            val mainSplashActivity =
+                packageManager.getComponentEnabledSetting(
+                    ComponentName(packageName, mainActivity)
+                )
+            if (mainSplashActivity == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
+                Log.i("HUE", "vai ativar ValhallaActivityIcon30")
+                scheduleChangeLauncherActivity(
+                    activitiesEnabled = arrayOf(ValhallaActivityIcon30::class.java.name),
+                    activitiesDisabled = arrayOf(
+                        ValhallaActivityIcon60::class.java.name,
+                        mainActivityAlias,
+                        mainActivity,
+                    ),
+                )
+            }
         }
     }
 }
