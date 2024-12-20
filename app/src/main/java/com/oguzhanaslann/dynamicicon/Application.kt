@@ -49,6 +49,9 @@ class Application : Application() {
                 ),
             )
         } else {
+            if (packageManager.getComponentEnabledSetting(ComponentName(packageName, ValhallaActivityIcon60::class.java.name)) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
+                return
+            }
             val mainSplashActivity =
                 packageManager.getComponentEnabledSetting(
                     ComponentName(packageName, mainActivity)
