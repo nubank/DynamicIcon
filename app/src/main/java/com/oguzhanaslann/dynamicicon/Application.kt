@@ -34,45 +34,7 @@ class Application : Application() {
     override fun onCreate() {
         super.onCreate()
         handleLauncherUpdate()
-//        migrateToValhalla()
     }
-
-    private fun migrateToValhalla() {
-        val legacySplash = packageManager.getComponentEnabledSetting(
-            ComponentName(
-                packageName,
-                SplashScreenActivity::class.java.name
-            )
-        )
-        val legacyUV = packageManager.getComponentEnabledSetting(
-            ComponentName(
-                packageName,
-                UVSplashScreenActivity::class.java.name
-            )
-        )
-        val valhalla = packageManager.getComponentEnabledSetting(
-            ComponentName(
-                packageName,
-                ValhallaSplashScreenActivity::class.java.name
-            )
-        )
-        val valhallaUV = packageManager.getComponentEnabledSetting(
-            ComponentName(
-                packageName,
-                ValhallaUVSplashScreenActivity::class.java.name
-            )
-        )
-
-        if (legacySplash == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
-            Log.d("HUE", "migrateToValhalla")
-            scheduleChangeLauncherActivity(
-                activitiesEnabled = arrayOf(ValhallaSplashScreenActivity::class.java.name),
-                activitiesDisabled = arrayOf(SplashScreenActivity::class.java.name),
-            )
-        }
-
-    }
-
 
     /// USECASE 4
     private fun handleLauncherUpdate() {
@@ -81,40 +43,41 @@ class Application : Application() {
         if (packageManager.getComponentEnabledSetting(
                 ComponentName(packageName, ValhallaUVSplashScreenActivity::class.java.name)
             ) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-            || packageManager.getComponentEnabledSetting(
-                ComponentName(packageName, ValhallaSplashScreenActivity::class.java.name)
-            ) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED
         ) {
+            Log.d("HUE", "Ja é ValhallaUVSplashScreenActivity")
             return
         }
 
-        val uvLegacy =
-            packageManager.getComponentEnabledSetting(
-                ComponentName(
-                    packageName,
-                    UVSplashScreenActivity::class.java.name
-                )
-            )
-        if (uvLegacy == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
+
+        if (packageManager.getComponentEnabledSetting(
+                ComponentName(packageName, ValhallaSplashScreenActivity::class.java.name)
+            ) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+        ) {
+            Log.i("HUE", "ja é ValhallaSplashScreenActivity")
+            return
+        }
+
+        if (packageManager.getComponentEnabledSetting(
+                ComponentName(packageName, UVSplashScreenActivity::class.java.name)
+            ) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+        ) {
             Log.i("HUE", "vai ativar ValhallaUVSplashScreenActivity")
             scheduleChangeLauncherActivity(
-                activitiesEnabled = arrayOf(
-                    ValhallaUVSplashScreenActivity::class.java.name,
-                    SplashScreenActivity::class.java.name
-                ),
+                activitiesEnabled = arrayOf(ValhallaUVSplashScreenActivity::class.java.name),
                 activitiesDisabled = arrayOf(
                     ValhallaSplashScreenActivity::class.java.name,
                     UVSplashScreenActivity::class.java.name,
+                    SplashScreenActivity::class.java.name,
                 ),
             )
         } else {
-            if (isActivityEnabled(SplashScreenActivity::class.java.name)) {
+            if (packageManager.getComponentEnabledSetting(
+                    ComponentName(packageName, SplashScreenActivity::class.java.name)
+                ) == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
+            ) {
                 Log.i("HUE", "vai ativar ValhallaSplashScreenActivity")
                 scheduleChangeLauncherActivity(
-                    activitiesEnabled = arrayOf(
-                        ValhallaSplashScreenActivity::class.java.name,
-                        "com.oguzhanaslann.dynamicicon.LegacyConfigActivity"
-                    ),
+                    activitiesEnabled = arrayOf(ValhallaSplashScreenActivity::class.java.name),
                     activitiesDisabled = arrayOf(
                         ValhallaUVSplashScreenActivity::class.java.name,
                         UVSplashScreenActivity::class.java.name,
@@ -125,10 +88,11 @@ class Application : Application() {
         }
     }
 
-    private fun isActivityEnabled(activityName: String): Boolean =
-        packageManager.getComponentEnabledSetting(
+    private fun isActivityEnabled(activityName: String): Boolean {
+        return packageManager.getComponentEnabledSetting(
             ComponentName(packageName, activityName)
         ) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED || packageManager.getComponentEnabledSetting(
             ComponentName(packageName, activityName)
         ) == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
+    }
 }

@@ -44,14 +44,14 @@ class SplashScreenActivity : ComponentActivity() {
                             Log.d("HUE", "30 Click")
                             scheduleChangeLauncherActivity(
                                 activitiesEnabled = arrayOf(SplashScreenActivity::class.java.name),
-                                activitiesDisabled = arrayOf("com.oguzhanaslann.dynamicicon.UVSplashScreenActivity")
+                                activitiesDisabled = arrayOf(UVSplashScreenActivity::class.java.name)
                             )
                         },
                         on60Click = {
                             Log.d("HUE", "60 Click")
                             scheduleChangeLauncherActivity(
-                                activitiesEnabled = arrayOf(ValhallaUVSplashScreenActivity::class.java.name),
-                                activitiesDisabled = arrayOf("com.oguzhanaslann.dynamicicon.UVSplashScreenActivity")
+                                activitiesEnabled = arrayOf(UVSplashScreenActivity::class.java.name),
+                                activitiesDisabled = arrayOf(SplashScreenActivity::class.java.name)
                             )
                         }
                     )

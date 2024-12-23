@@ -35,7 +35,7 @@ open class ValhallaSplashScreenActivity : ComponentActivity() {
                     Screen(
                         on30Click = {
                             Log.d("HUE", "30 Click - INTENT")
-                            startActivity(Intent(this, SplashScreenActivity::class.java))
+                            startActivity(Intent(this, LegacyDependenciesInitializerActivity::class.java))
                         },
                         on60Click = {
                             Log.d("HUE", "60 Click")
