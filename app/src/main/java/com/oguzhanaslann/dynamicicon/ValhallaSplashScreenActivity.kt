@@ -17,6 +17,7 @@ import com.oguzhanaslann.dynamicicon.ui.theme.DynamicIconTheme
 
 open class ValhallaSplashScreenActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("HUE", "ValhallaSplashScreenActivity.onCreate")
         super.onCreate(savedInstanceState)
 
         setContent {
@@ -26,7 +27,7 @@ open class ValhallaSplashScreenActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Text(
-                        text = "Valhalla",
+                        text = "Splash Valhalla",
                         modifier = Modifier.fillMaxWidth(),
                         fontSize = 30.sp,
                         textAlign = TextAlign.Center,
@@ -37,7 +38,11 @@ open class ValhallaSplashScreenActivity : ComponentActivity() {
                             startActivity(Intent(this, SplashScreenActivity::class.java))
                         },
                         on60Click = {
-                            Log.d("HUE", "60 Click - NOTHING")
+                            Log.d("HUE", "60 Click")
+                            scheduleChangeLauncherActivity(
+                                activitiesEnabled = arrayOf(ValhallaUVSplashScreenActivity::class.java.name),
+                                activitiesDisabled = arrayOf(ValhallaSplashScreenActivity::class.java.name)
+                            )
                         }
                     )
                 }

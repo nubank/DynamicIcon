@@ -26,19 +26,23 @@
         </activity>
 
         <activity-alias
+            android:name="com.oguzhanaslann.dynamicicon.LegacyConfigActivity"
+            android:enabled="false"
+            android:exported="true"
+            android:targetActivity=".SplashScreenActivity"/>
+
+        <activity
                 android:name="com.oguzhanaslann.dynamicicon.UVSplashScreenActivity"
                 android:enabled="false"
                 android:exported="true"
                 android:icon="@drawable/baseline_60fps_24"
                 android:label="@string/app_name"
-                android:roundIcon="@drawable/baseline_60fps_24"
-                android:targetActivity=".SplashScreenActivity">
+                android:roundIcon="@drawable/baseline_60fps_24">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-        </activity-alias>
+        </activity>
 
         <activity
             android:name=".ValhallaSplashScreenActivity"
